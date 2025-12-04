@@ -23,6 +23,9 @@ type RequestBody struct {
 	CancelUrl   string   `json:"cancelUrl"`
 	NotifyUrl   string   `json:"notifyUrl"`
 	ReferenceId string   `json:"referenceId"`
+	BuyerName   string   `json:"buyerName"`
+	BuyerEmail  string   `json:"buyerEmail"`
+	BuyerPhone  string   `json:"buyerPhone"`
 }
 
 type ApiResponse struct {
@@ -45,7 +48,7 @@ func GenerateSignature(va, apiKey, requestBody, method string) string {
 	return signature
 }
 
-func Payment(c *fiber.Ctx, phone string, product string, price, link string, uniqid string) error {
+func Payment(c *fiber.Ctx, name string, phone string, email string, product string, price, link string, uniqid string) error {
 	// Request body data
 	va := os.Getenv("ipaymuVa")      // Get this from iPaymu dashboard
 	apiKey := os.Getenv("ipaymuKey") // Get this from iPaymu dashboard
@@ -60,8 +63,11 @@ func Payment(c *fiber.Ctx, phone string, product string, price, link string, uni
 		Price:       []string{price},
 		ReturnUrl:   link + "/tiketku/" + uniqid,
 		CancelUrl:   link + "/bayarDulu/" + phone,
-		NotifyUrl:   link + "/bayarDulu/" + phone,
+		NotifyUrl:   link + "/tiketku/" + uniqid,
 		ReferenceId: uniqid,
+		BuyerName:   name,  // optional
+		BuyerEmail:  email, // optional
+		BuyerPhone:  phone,
 	}
 
 	// Convert body to JSON

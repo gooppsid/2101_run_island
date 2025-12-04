@@ -44,7 +44,7 @@ func Bayar(c *fiber.Ctx) error {
 
 	harga := strconv.Itoa(register.Harga)
 
-	helper.Payment(c, register.Phone, "Fun Run "+register.Funrun+" Nama: "+register.Nama, harga, c.BaseURL(), uniqid)
+	helper.Payment(c, register.Nama, register.Phone, register.Email, "Fun Run "+register.Funrun+" Nama: "+register.Nama, harga, c.BaseURL(), uniqid)
 
 	return nil
 }
