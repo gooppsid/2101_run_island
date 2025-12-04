@@ -1,0 +1,33 @@
+<div class="flex justify-center items-center min-h-screen p-7 md:p-14">
+    <div class="boder rounded-lg overflow-hidden h-full bg-black">
+        <div class="bg-yellow-200 p-3 rounded-bl-2xl">
+            <h1 class="text-2xl">
+                MOBILRUN THE ISLAND
+            </h1>
+        </div>
+        <div class="flex justify-center p-7">
+            {{ if eq .register.Status "Paid" }}
+            <img src="https://api.qrserver.com/v1/create-qr-code/?margin=15&size=150x150&data=Example" alt="qr">
+            {{ else }}
+            <img src="https://thumbs.dreamstime.com/b/red-unpaid-stamp-distressed-edges-isolated-white-background-rectangular-word-bold-letters-408791644.jpg" alt="qr" class="w-[150px] h-[150px] object-contain">
+            {{ end }}
+        </div>
+        <div class="bg-yellow-200 p-3 rounded-tr-2xl">
+            <p>Nama</p>
+            <strong>{{ .register.Nama }}</strong>
+            <div class="divider"></div>
+            <p>Fun Run</p>
+            {{ .register.Funrun }}
+
+            {{ if ne .register.Status "Paid" }}
+            <div class="text-end">
+                <form action="/bayar/{{ .register.Uniqid }}" method="post">
+                    <button type="submit" class="btn btn-success">
+                        Bayar IDR {{ number_format .register.Harga }}
+                    </button>
+                </form>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<!-- HERO SECTION -->
+<section class="relative bg-cover bg-center h-[90vh] flex items-center justify-center"
+    style="background-image: url('https://i.pinimg.com/736x/a6/a7/8d/a6a78dd83e36b1c05fcd1a0eee6be311.jpg');">
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="relative z-10 text-center text-white px-6">
+        <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-lg">MobilRun The Island</h1>
+        <p class="text-2xl md:text-3xl font-semibold mt-3">Nusa Dua Bali • 1 February 2026</p>
+    </div>
+</section>
+
+<div class="p-5 md:p-20">
+    <div class="border rounded-2xl p-2 md:p-10">
+        <div class="bg-white p-10 rounded-xl shadow hover:shadow-lg transition border-t-8 border-orange-500 mb-7">
+            <h3 class="text-3xl font-bold">{{ .kategori.Nama }}</h3>
+            <p class="text-4xl font-extrabold text-orange-600 mt-4">Rp {{ number_format .kategori.Harga }}</p>
+            <p class="text-lg text-gray-600">{{ .kategori.Noted }}</p>
+        </div>
+
+        <form action="/simpanRegister/{{ .kategori.Funrun }}/{{ .kategori.Harga }}" autocomplete="off" method="post">
+
+            <p>Nama Lengap*</p>
+            <input type="text" name="nama" class="input w-full mb-5" placeholder="Nama Lengkap" required>
+
+            <p>Email*</p>
+            <input type="email" name="email" class="input w-full mb-5" placeholder="Email" required>
+
+            <p>No. Telp.*</p>
+            <div class="join w-full mb-5">
+                <div class="join-item w-20">
+                    <select name="code" class="select">
+                        <option value="62">+62</option>
+                        <option value="1">+1</option>
+                        <option value="44">+44</option>
+                        <option value="60">+60</option>
+                        <option value="65">+65</option>
+                        <option value="81">+81</option>
+                        <option value="86">+86</option>
+                        <option value="91">+91</option>
+                    </select>
+                </div>
+                <div class="join-item w-full">
+                    <input type="number" name="phone" class="input w-full" placeholder="8123xxx" required>
+                </div>
+            </div>
+
+            <p>No. KTP/Paspor*</p>
+            <input type="number" name="ktp" class="input w-full mb-5" placeholder="12345xxx" required>
+
+            <p>Usia*</p>
+            <select name="usia" class="select w-full mb-5" required>
+                <option value="">--Pilih Usia--</option>
+                {{ range .usia }}
+                <option value="{{ . }} Tahun">{{ . }} Tahun</option>
+                {{ end }}
+            </select>
+
+            <p>Golongan Darah*</p>
+            <input type="text" name="goldar" class="input w-full mb-5" placeholder="Golongan Darah" required>
+
+            <p>Kontak Darurat*</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 border rounded-lg gap-3 p-3 mb-5">
+                <div>
+                    <p>Nama</p>
+                    <input type="text" name="nama1" class="input w-full" placeholder="Nama" required>
+                </div>
+                <div>
+                    <p>No. Telp.</p>
+                    <input type="number" name="phone1" class="input w-full" placeholder="No. Telp" required>
+                </div>
+            </div>
+
+            <p>Alamat Lengkap*</p>
+            <textarea name="alamat" class="textarea w-full mb-5" required></textarea>
+
+            <p>Punya riwayat penyakit ? (sebutkan jika ada)*</p>
+            <textarea name="penyakit" class="textarea w-full mb-5" required></textarea>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-warning">
+                    REGISTRASI
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

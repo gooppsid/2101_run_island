@@ -22,6 +22,7 @@ func main() {
 	helper.ConnectDB()
 	helper.DB.AutoMigrate(
 		models.Kategori{},
+		models.Registers{},
 	)
 
 	//engine
@@ -35,6 +36,7 @@ func main() {
 	r.Static("public", "./public")
 	routes.MainRoute(r)
 	routes.KategoriR(r)
+	routes.RegisterR(r)
 
 	r.Listen(os.Getenv("app_port"))
 }

@@ -22,7 +22,7 @@ func Kategori(c *fiber.Ctx) error {
 // simpan kategori
 func SimpanKategori(c *fiber.Ctx) error {
 	helper.DB.Model(&models.Kategori{}).Create(map[string]interface{}{
-		"uniqid": helper.UniqID(),
+		"funrun": c.FormValue("funrun"),
 		"nama":   c.FormValue("nama"),
 		"slug":   slug.Make(c.FormValue("nama")),
 		"harga":  c.FormValue("harga"),
@@ -39,6 +39,7 @@ func UpdateKategori(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	helper.DB.Model(&models.Kategori{}).Where("id=?", id).Updates(map[string]interface{}{
+		"funrun": c.FormValue("funrun"),
 		"nama":   c.FormValue("nama"),
 		"slug":   slug.Make(c.FormValue("nama")),
 		"harga":  c.FormValue("harga"),

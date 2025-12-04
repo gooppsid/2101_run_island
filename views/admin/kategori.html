@@ -11,7 +11,10 @@
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
             <form action="/admin/simpan-kategori" autocomplete="off" method="post">
-                <p>Nama Kategori*</p>
+                <p>Fun Run*</p>
+                <input type="text" name="funrun" class="input w-full mb-5" placeholder="5K" required>
+
+                <p>Nama*</p>
                 <input type="text" name="nama" class="input w-full mb-5" placeholder="Nama Kategori" required>
 
                 <p>Harga*</p>
@@ -44,7 +47,7 @@
             <!-- head -->
             <thead>
                 <tr>
-                    <th>Uniq</th>
+                    <th>Funrun</th>
                     <th>Nama Kategori</th>
                     <th>Slug</th>
                     <th>Harga</th>
@@ -57,7 +60,7 @@
             <tbody>
                 {{range .kategori}}
                 <tr>
-                    <td>{{.Uniqid}}</td>
+                    <td>{{.Funrun}}</td>
                     <td>{{.Nama}}</td>
                     <td>{{.Slug}}</td>
                     <td>Rp {{number_format .Harga}}</td>
