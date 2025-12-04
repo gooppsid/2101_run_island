@@ -41,12 +41,31 @@ func Registrasi(c *fiber.Ctx) error {
 	}, "main/layout")
 }
 
+// bayar
+func BayarDulu(c *fiber.Ctx) error {
+	phone := c.Params("phone")
+
+	var register models.Registers
+	helper.DB.Where("phone = ?", phone).First(&register)
+
+	return c.Render("main/bayar", fiber.Map{
+		"title":    "| Bayar Tiketku",
+		"register": register,
+	}, "main/layout")
+}
+
 // tiketku
 func Tiketku(c *fiber.Ctx) error {
 	uniqid := c.Params("uniqid")
 
 	var register models.Registers
 	helper.DB.Where("uniqid = ?", uniqid).First(&register)
+
+	if register.Status == "Pending" {
+		helper.DB.Model(&models.Registers{}).Where("uniqid = ?", uniqid).Update(
+			"status", "Paid",
+		)
+	}
 
 	return c.Render("main/tiketku", fiber.Map{
 		"title":    "| Tiketku",

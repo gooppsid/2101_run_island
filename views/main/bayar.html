@@ -7,7 +7,7 @@
         </div>
         <div class="flex justify-center p-7">
             {{ if eq .register.Status "Paid" }}
-            <img src="https://api.qrserver.com/v1/create-qr-code/?margin=15&size=150x150&data=Example" alt="qr">
+            <img src="https://thumbs.dreamstime.com/b/paid-stamp-paid-grunge-stamp-sign-icon-editable-vector-illustration-isolated-white-background-123572302.jpg" alt="qr" class="w-[150px] h-[150px] object-contain">
             {{ else }}
             <img src="https://thumbs.dreamstime.com/b/red-unpaid-stamp-distressed-edges-isolated-white-background-rectangular-word-bold-letters-408791644.jpg" alt="qr" class="w-[150px] h-[150px] object-contain">
             {{ end }}
@@ -18,6 +18,16 @@
             <div class="divider"></div>
             <p>Fun Run</p>
             {{ .register.Funrun }}
+
+            {{ if ne .register.Status "Paid" }}
+            <div class="text-end">
+                <form action="/bayar/{{ .register.Uniqid }}" method="post">
+                    <button type="submit" class="btn btn-success">
+                        Bayar IDR {{ number_format .register.Harga }}
+                    </button>
+                </form>
+            </div>
+            {{ end }}
         </div>
     </div>
 </div>
